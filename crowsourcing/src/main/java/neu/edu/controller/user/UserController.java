@@ -22,9 +22,9 @@ public class UserController {
 		ResponseEntity<?> responseEntity = new ResponseEntity<>("User Creation Failed",
 				HttpStatus.UNPROCESSABLE_ENTITY);
 		;
-		UserModel userProfile = null;
-		if ((userProfile = userService.createUser(userCreation)) != null) {
-			responseEntity = new ResponseEntity<>(userProfile, HttpStatus.OK);
+		if (userService.createUser(userCreation)) {
+			System.out.println("Post");
+			responseEntity = new ResponseEntity<>(userCreation.getEmailId(), HttpStatus.OK);
 		}
 		return responseEntity;
 	}
