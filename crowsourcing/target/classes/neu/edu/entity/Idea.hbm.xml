@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Dec 10, 2017 12:06:39 PM by Hibernate Tools 5.2.6.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="crowdsourcing" dynamic-insert="false" dynamic-update="false" mutable="true" name="neu.edu.entity.Idea" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="idea">
+        <id name="ideaId" type="java.lang.Integer">
+            <column name="idea_id"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="neu.edu.entity.Category" embed-xml="true" fetch="select" insert="true" name="category" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="category_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="neu.edu.entity.Creator" embed-xml="true" fetch="select" insert="true" name="creator" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="creator_id" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="name" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="name" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="description" optimistic-lock="true" type="string" unique="false">
+            <column length="500" name="description" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="totalFund" optimistic-lock="true" type="int" unique="false">
+            <column name="total_fund" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="receivedFund" optimistic-lock="true" type="int" unique="false">
+            <column name="received_fund" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="status" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="status"/>
+        </property>
+        <property generated="never" lazy="false" name="reason" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="reason"/>
+        </property>
+        <property generated="never" lazy="false" name="ideaDate" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="idea_date" not-null="true"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="serviceDetails" optimistic-lock="true" sort="unsorted" table="service_detail">
+            <key on-delete="noaction">
+                <column name="idea_id" not-null="true"/>
+            </key>
+            <one-to-many class="neu.edu.entity.ServiceDetail" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="fundings" optimistic-lock="true" sort="unsorted" table="funding">
+            <key on-delete="noaction">
+                <column name="idea_id" not-null="true"/>
+            </key>
+            <one-to-many class="neu.edu.entity.Funding" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

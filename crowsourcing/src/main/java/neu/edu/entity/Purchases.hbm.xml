@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Dec 10, 2017 12:06:39 PM by Hibernate Tools 5.2.6.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="crowdsourcing" dynamic-insert="false" dynamic-update="false" mutable="true" name="neu.edu.entity.Purchases" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="purchases">
+        <id name="purchaseId" type="java.lang.Integer">
+            <column name="purchase_id"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="neu.edu.entity.Funders" embed-xml="true" fetch="select" insert="true" name="funders" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="funder_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="neu.edu.entity.Funding" embed-xml="true" fetch="select" insert="true" name="funding" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="funding_id" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>
