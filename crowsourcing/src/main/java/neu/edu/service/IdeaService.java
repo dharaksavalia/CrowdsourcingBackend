@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import neu.edu.controller.bid.BidCreation;
 import neu.edu.controller.idea.FundingCreation;
 import neu.edu.controller.idea.IdeaCreation;
 import neu.edu.controller.idea.ServiceCreation;
@@ -18,6 +19,7 @@ import neu.edu.dao.FundingDao;
 import neu.edu.dao.IdeaDao;
 import neu.edu.dao.ServiceDetailDao;
 import neu.edu.dao.UserDao;
+import neu.edu.entity.Bids;
 import neu.edu.entity.Category;
 import neu.edu.entity.Creator;
 import neu.edu.entity.Funding;
@@ -157,6 +159,19 @@ public class IdeaService {
 			ideacreations.add(ideacreation);
 		}
 		return ideacreations;
+	}
+	public List<BidCreation> getBidding(String emailId, Integer serviceId) {
+		ServiceDetail serviceDetail= serviceDetailDao.findOne(serviceId);
+		ArrayList<BidCreation>bidCreations=new ArrayList<>();
+		for(Bids bid:serviceDetail.getBidses()) {
+			BidCreation bidCreation=new BidCreation();
+			bidCreation.setBidAmount(bid.getBidAmount());
+			bidCreation.setDescription(bid.getDescription());
+			bidCreation.setTimeRequired(bid.getTimeRequired());
+			bidCreation.setBidId(bid.getBidId());
+			bidCreations.add(bidCreation);
+		}
+		return bidCreations;
 	}
 	
 
