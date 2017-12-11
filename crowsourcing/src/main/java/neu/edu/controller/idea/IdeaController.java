@@ -1,5 +1,7 @@
 package neu.edu.controller.idea;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,4 +34,15 @@ public class IdeaController {
 		return responseEntity;
 		
 	}
+	@RequestMapping(path="/{category}",method=RequestMethod.GET)
+	public ResponseEntity<?> createIdea(@PathVariable("category")String category) {
+		ResponseEntity responseEntity=new ResponseEntity<>("ideas available for you or that category",HttpStatus.UNPROCESSABLE_ENTITY);
+		System.out.println("category"+category);
+			List<IdeaCreation> ideaCreations=ideaService.getIdea(category);
+			if(!ideaCreations.isEmpty())
+		 responseEntity=new ResponseEntity<>(ideaCreations,HttpStatus.OK);
+		return responseEntity;
+		
+	}
+
 }

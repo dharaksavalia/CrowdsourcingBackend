@@ -8,8 +8,15 @@ public class ServiceCreation {
 	Integer maxBid;
 	@NotNull
 	String description;
+	public Integer getServiceId() {
+		return ServiceId;
+	}
+	public void setServiceId(Integer serviceId) {
+		ServiceId = serviceId;
+	}
 	@NotNull
 Long endDate;
+	Integer ServiceId;
 public Integer getMaxBid() {
 	return maxBid;
 }

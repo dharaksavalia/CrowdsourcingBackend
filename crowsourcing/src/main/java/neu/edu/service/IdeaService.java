@@ -1,5 +1,6 @@
 package neu.edu.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -75,6 +76,49 @@ public class IdeaService {
 		creator.setLastIdeaDate(date.getTime());
 		creatorDao.save(creator);
 	return true;
+	}
+	@Transactional
+	public List<IdeaCreation> getIdea(String category) {
+		// TODO Auto-generated method stub
+		List<IdeaCreation> ideaCreation=new ArrayList();
+		List <Category>categories=categoryDao.findByCatergoryName(category);
+		Category categoryEntity=null;
+		if(!categories.isEmpty())
+		categoryEntity=categories.get(0);
+		List<IdeaCreation>ideacreations=new ArrayList<>();
+		if(categoryEntity!=null)
+		for(Idea idea:categoryEntity.getIdeas()) {
+			IdeaCreation ideacreation=new IdeaCreation();
+			ideacreation.setCategory(idea.getCategory().getCatergoryName());
+			ideacreation.setEndDate(idea.getIdeaDate());
+			ideacreation.setDescription(idea.getDescription());
+			ideacreation.setName(idea.getName());
+			ideacreation.setIdeaId(idea.getIdeaId());
+			ArrayList<FundingCreation>fundingCreations=new ArrayList<>();
+			for(Funding funding:idea.getFundings()) {
+				FundingCreation fundcreation=new FundingCreation();
+				fundcreation.setAmount(funding.getAmount());
+				fundcreation.setMaxUsers(((funding.getMaxUser())));
+				fundcreation.setUnit(funding.getUnit());
+				fundcreation.setFundingId(funding.getFundingId());
+				fundingCreations.add(fundcreation);
+				
+			}
+			ideacreation.setFundingCreations(fundingCreations);
+			ArrayList<ServiceCreation>ServiceCreations=new ArrayList<>();
+			for(ServiceDetail servicedetail:idea.getServiceDetails()) {
+				ServiceCreation servicecreation=new ServiceCreation();
+				servicecreation.setDescription(servicedetail.getServiceDes());
+				servicecreation.setServiceId(servicedetail.getServiceId());
+				servicecreation.setEndDate(servicedetail.getServiceEndDate());
+				servicecreation.setMaxBid(servicedetail.getMaxBidAmount());
+				ServiceCreations.add(servicecreation);
+			}
+			ideacreation.setServiceCreations(ServiceCreations);
+			ideacreations.add(ideacreation);
+		}
+		return ideacreations;
+
 	}
 	
 

@@ -9,6 +9,13 @@ public class FundingCreation {
 	Integer unit;
 	@NotNull
 	Integer amount;
+	Integer FundingId;
+	public Integer getFundingId() {
+		return FundingId;
+	}
+	public void setFundingId(Integer fundingId) {
+		FundingId = fundingId;
+	}
 	public Integer getMaxUsers() {
 		return maxUsers;
 	}

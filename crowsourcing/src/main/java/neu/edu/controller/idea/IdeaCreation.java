@@ -26,6 +26,13 @@ public class IdeaCreation {
 	List<FundingCreation>fundingCreations;
 	@NotNull
 	String category;
+	Integer IdeaId;
+	public Integer getIdeaId() {
+		return IdeaId;
+	}
+	public void setIdeaId(Integer ideaId) {
+		IdeaId = ideaId;
+	}
 	public String getName() {
 		return name;
 	}
