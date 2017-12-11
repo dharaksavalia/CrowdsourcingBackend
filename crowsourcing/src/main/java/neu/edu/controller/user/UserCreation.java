@@ -11,6 +11,34 @@ private String password;
 private String firstName;
 @NotNull
 private String lastName;
+private String funders;
+private String startup;
+private String creator;
+private String category;
+public String getCategory() {
+	return category;
+}
+public void setCategory(String category) {
+	this.category = category;
+}
+public String getFunders() {
+	return funders;
+}
+public String getStartup() {
+	return startup;
+}
+public String getCreator() {
+	return creator;
+}
+public void setFunders(String funders) {
+	this.funders = funders;
+}
+public void setStartup(String startup) {
+	this.startup = startup;
+}
+public void setCreator(String creator) {
+	this.creator = creator;
+}
 public String getLastName() {
 	return lastName;
 }

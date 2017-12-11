@@ -1,5 +1,5 @@
 package neu.edu.entity;
-// Generated Dec 10, 2017 2:05:26 PM by Hibernate Tools 5.2.6.Final
+// Generated Dec 11, 2017 12:25:19 PM by Hibernate Tools 5.2.6.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,10 +31,6 @@ public class Funders implements java.io.Serializable {
 	public Funders() {
 	}
 
-	public Funders(String funderName) {
-		this.funderName = funderName;
-	}
-
 	public Funders(String funderName, String funderAddress, String cardNo, String expDate, String cvv, Set<User> users,
 			Set<Purchases> purchaseses) {
 		this.funderName = funderName;
@@ -58,7 +54,7 @@ public class Funders implements java.io.Serializable {
 		this.funderId = funderId;
 	}
 
-	@Column(name = "funder_name", nullable = false, length = 50)
+	@Column(name = "funder_name", length = 50)
 	public String getFunderName() {
 		return this.funderName;
 	}

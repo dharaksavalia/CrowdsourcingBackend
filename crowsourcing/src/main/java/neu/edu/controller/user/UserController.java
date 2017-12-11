@@ -17,6 +17,7 @@ import neu.edu.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
+
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> createUser(@Valid @RequestBody UserCreation userCreation) {
 
@@ -47,13 +48,37 @@ public class UserController {
 
 		ResponseEntity<?> responseEntity = new ResponseEntity<>("Cannot make you startup",
 				HttpStatus.UNPROCESSABLE_ENTITY);
-		;
+		
 		if (userService.makeUserStartup(emailId,Category)) {
 			System.out.println("inside");
 			responseEntity = new ResponseEntity<>("You are Startup", HttpStatus.OK);
 		}
 		return responseEntity;
 	}
+	@RequestMapping(path="/{emailId}/funder")
+	public ResponseEntity<?> makeMeFunder(@PathVariable("emailId") String emailId) {
+
+		ResponseEntity<?> responseEntity = new ResponseEntity<>("Cannot make you funder",
+				HttpStatus.UNPROCESSABLE_ENTITY);
+		;
+		if (userService.makeUserFunder(emailId)) {
+			System.out.println("inside");
+			responseEntity = new ResponseEntity<>("You are funder", HttpStatus.OK);
+		}
+		return responseEntity;
+	}
+	@RequestMapping(path="/{emailId}/admin")
+	public ResponseEntity<?> makeAdmin(@PathVariable("emailId") String emailId){
+		ResponseEntity<?> responseEntity = new ResponseEntity<>("Admin",
+				HttpStatus.UNPROCESSABLE_ENTITY);
+		;
+		if (userService.makeAdmin(emailId)) {
+			System.out.println("inside");
+			responseEntity = new ResponseEntity<>("Admin Made", HttpStatus.OK);
+		}
+		return responseEntity;
+	}
+	 
 	
 	
 }

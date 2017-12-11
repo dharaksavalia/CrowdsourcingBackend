@@ -12,17 +12,20 @@ import neu.edu.controller.user.UserCreation;
 import neu.edu.controller.user.UserModel;
 import neu.edu.dao.CategoryDao;
 import neu.edu.dao.CreatorDao;
+import neu.edu.dao.FundersDao;
 import neu.edu.dao.PersonDao;
 import neu.edu.dao.StartupDao;
 import neu.edu.dao.UserDao;
 import neu.edu.entity.Category;
 import neu.edu.entity.Creator;
+import neu.edu.entity.Funders;
 import neu.edu.entity.Person;
 import neu.edu.entity.Startup;
 import neu.edu.entity.User;
 
 @Service
 public class UserService {
+	String ADMIN="Yes";
 @Autowired
 UserDao userDao;
 @Autowired
@@ -33,6 +36,8 @@ CreatorDao creatorDao;
 CategoryDao categoryDao;
 @Autowired
 StartupDao startupDao;
+@Autowired
+FundersDao fundersDao;
 @Transactional
 public boolean createUser(UserCreation userCreation) {
 	// TODO Auto-generated method stub
@@ -51,6 +56,18 @@ public boolean createUser(UserCreation userCreation) {
 		user.setPassword(userCreation.getPassword());
 		user=userDao.save(user);
 		if(user!=null) {
+			if(userCreation.getFunders()!=null)
+			if(userCreation.getFunders().equals("Yes")) {
+				makeUserFunder(userCreation.getEmailId());
+			}
+			if(userCreation.getStartup()!=null)
+			if(userCreation.getStartup().equals("Yes")) {
+				makeUserStartup(userCreation.getEmailId(),userCreation.getCategory());
+			}
+			if(userCreation.getStartup()!=null)
+			if(userCreation.getCreator().equals("Yes")) {
+				makeUserCreator(userCreation.getEmailId());
+			}
 			return true;
 		}
 	}
@@ -104,5 +121,45 @@ public boolean makeUserStartup(String emailId, String categoryName) {
 	}
 	return false;
 
+}
+
+public boolean makeUserFunder(String emailId) {
+	// TODO Auto-generated method stub
+	User user=getUser(emailId);
+	if(user.getFunders()==null) {
+		Funders funder=new Funders();
+		funder=fundersDao.save(funder);
+		if(funder.getFunderId()!=null) {
+			user.setFunders(funder);
+			userDao.save(user);
+			return true;
+		}
+	}
+	return false;
+}
+public boolean makeAdmin(String emailId) {
+	// TODO Auto-generated method stub
+	User user=userDao.findByEmailId(emailId).get(0);
+	user.setAdmin(ADMIN);
+	user=userDao.save(user);
+	if(user!=null) {
+		return true;
+	}
+	return false;
+}
+public boolean isUserCreator(String emailId) {
+	// TODO Auto-generated method stub
+	User user;
+	List users=userDao.findByEmailId(emailId);
+	if(users.size()>0) {
+		System.out.println("able to find user");
+		user=(User)users.get(0);
+	}else return false;
+	if(user!=null) {
+		if(user.getCreator()!=null) {
+			return true;
+		}
+	}
+	return false;
 }
 }
