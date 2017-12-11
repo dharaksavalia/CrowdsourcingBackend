@@ -1,5 +1,5 @@
 package neu.edu.entity;
-// Generated Dec 11, 2017 12:25:19 PM by Hibernate Tools 5.2.6.Final
+// Generated Dec 11, 2017 3:44:24 PM by Hibernate Tools 5.2.6.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

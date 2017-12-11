@@ -23,6 +23,7 @@ import neu.edu.entity.Creator;
 import neu.edu.entity.Funding;
 import neu.edu.entity.Idea;
 import neu.edu.entity.ServiceDetail;
+import neu.edu.entity.User;
 
 @Service
 public class IdeaService {
@@ -119,6 +120,43 @@ public class IdeaService {
 		}
 		return ideacreations;
 
+	}
+	public List<IdeaCreation> getMyIdea(String emailId) {
+		// TODO Auto-generated method stub
+		List<IdeaCreation>ideacreations=new ArrayList<>();
+		List<User>users=userDao.findByEmailId(emailId);
+		if(!users.isEmpty())
+		for(Idea idea:users.get(0).getCreator().getIdeas()) {
+			IdeaCreation ideacreation=new IdeaCreation();
+			ideacreation.setCategory(idea.getCategory().getCatergoryName());
+			ideacreation.setEndDate(idea.getIdeaDate());
+			ideacreation.setDescription(idea.getDescription());
+			ideacreation.setName(idea.getName());
+			ideacreation.setIdeaId(idea.getIdeaId());
+			ArrayList<FundingCreation>fundingCreations=new ArrayList<>();
+			for(Funding funding:idea.getFundings()) {
+				FundingCreation fundcreation=new FundingCreation();
+				fundcreation.setAmount(funding.getAmount());
+				fundcreation.setMaxUsers(((funding.getMaxUser())));
+				fundcreation.setUnit(funding.getUnit());
+				fundcreation.setFundingId(funding.getFundingId());
+				fundingCreations.add(fundcreation);
+				
+			}
+			ideacreation.setFundingCreations(fundingCreations);
+			ArrayList<ServiceCreation>ServiceCreations=new ArrayList<>();
+			for(ServiceDetail servicedetail:idea.getServiceDetails()) {
+				ServiceCreation servicecreation=new ServiceCreation();
+				servicecreation.setDescription(servicedetail.getServiceDes());
+				servicecreation.setServiceId(servicedetail.getServiceId());
+				servicecreation.setEndDate(servicedetail.getServiceEndDate());
+				servicecreation.setMaxBid(servicedetail.getMaxBidAmount());
+				ServiceCreations.add(servicecreation);
+			}
+			ideacreation.setServiceCreations(ServiceCreations);
+			ideacreations.add(ideacreation);
+		}
+		return ideacreations;
 	}
 	
 

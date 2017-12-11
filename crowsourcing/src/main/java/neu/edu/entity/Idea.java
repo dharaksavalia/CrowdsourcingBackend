@@ -1,5 +1,5 @@
 package neu.edu.entity;
-// Generated Dec 11, 2017 12:25:19 PM by Hibernate Tools 5.2.6.Final
+// Generated Dec 11, 2017 3:44:24 PM by Hibernate Tools 5.2.6.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -69,13 +69,6 @@ public class Idea implements java.io.Serializable {
 	@Column(name = "idea_id", unique = true, nullable = false)
 	public Integer getIdeaId() {
 		return this.ideaId;
-	}
-
-	@Override
-	public String toString() {
-		return "Idea [name=" + name + ", description=" + description + ", totalFund=" + totalFund + ", receivedFund="
-				+ receivedFund + ", status=" + status + ", reason=" + reason + ", ideaDate=" + ideaDate
-				+ ", serviceDetails=" + serviceDetails + ", fundings=" + fundings + "]";
 	}
 
 	public void setIdeaId(Integer ideaId) {

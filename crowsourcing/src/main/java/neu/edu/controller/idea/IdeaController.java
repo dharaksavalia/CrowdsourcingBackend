@@ -35,10 +35,20 @@ public class IdeaController {
 		
 	}
 	@RequestMapping(path="/{category}",method=RequestMethod.GET)
-	public ResponseEntity<?> createIdea(@PathVariable("category")String category) {
+	public ResponseEntity<?> getIdea(@PathVariable("category")String category) {
 		ResponseEntity responseEntity=new ResponseEntity<>("ideas available for you or that category",HttpStatus.UNPROCESSABLE_ENTITY);
 		System.out.println("category"+category);
 			List<IdeaCreation> ideaCreations=ideaService.getIdea(category);
+			if(!ideaCreations.isEmpty())
+		 responseEntity=new ResponseEntity<>(ideaCreations,HttpStatus.OK);
+		return responseEntity;
+		
+	}
+	@RequestMapping(path="/{emailId}/myideas",method=RequestMethod.GET)
+	public ResponseEntity<?> getMyIdea(@PathVariable("emailId")String emailId) {
+		ResponseEntity responseEntity=new ResponseEntity<>("ideas available for you or that category",HttpStatus.UNPROCESSABLE_ENTITY);
+		System.out.println("category"+emailId);
+			List<IdeaCreation> ideaCreations=ideaService.getMyIdea(emailId);
 			if(!ideaCreations.isEmpty())
 		 responseEntity=new ResponseEntity<>(ideaCreations,HttpStatus.OK);
 		return responseEntity;
