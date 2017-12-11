@@ -7,7 +7,9 @@ public class UserCreation {
 private String emailId;
 @NotNull
 private String password;
+@NotNull
 private String firstName;
+@NotNull
 private String lastName;
 public String getLastName() {
 	return lastName;
