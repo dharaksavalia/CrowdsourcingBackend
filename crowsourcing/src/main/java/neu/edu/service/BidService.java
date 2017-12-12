@@ -66,5 +66,14 @@ public class BidService {
 		}
 		return BidCreation;
 	}
+	public void awardBid(Integer bidId) {
+		// TODO Auto-generated method stub
+		Bids bid=bidDao.findOne(bidId);
+		bid.setStatus("Yes");
+		bidDao.save(bid);
+		
+		
+		
+	}
 
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import neu.edu.controller.bid.BidCreation;
+import neu.edu.controller.funder.PurchasesCreation;
 import neu.edu.service.IdeaService;
 import neu.edu.service.UserService;
 
@@ -65,15 +66,7 @@ public class IdeaController {
 		return responseEntity;
 		
 	}
-	@RequestMapping(path="/{emailId}/myideas/{bidId}/awardBid",method=RequestMethod.GET)
-	public ResponseEntity<?> getMyServiceAward(@PathVariable("eamil")String emailId,@PathVariable("serviceId")Integer serviceId) {
-		ResponseEntity responseEntity=new ResponseEntity<>("ideas available for you or that category",HttpStatus.UNPROCESSABLE_ENTITY);
-		System.out.println("category"+emailId);
-			List<BidCreation> ideaCreations=ideaService.getBidding(emailId,serviceId);
-			if(!ideaCreations.isEmpty())
-		 responseEntity=new ResponseEntity<>(ideaCreations,HttpStatus.OK);
-		return responseEntity;
-		
-	}
+	
+	
 
 }

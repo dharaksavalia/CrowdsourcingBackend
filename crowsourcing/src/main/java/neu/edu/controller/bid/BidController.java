@@ -39,4 +39,11 @@ public class BidController {
 		return resposeEntity;
 		
 	}
+	@RequestMapping(path="/{bidId}/awardBid",method=RequestMethod.GET)
+	public ResponseEntity<?> getMyServiceAward(@PathVariable("bidId")Integer bidId) {
+		ResponseEntity responseEntity=new ResponseEntity<>("ideas available for you or that category",HttpStatus.UNPROCESSABLE_ENTITY);
+		bidService.awardBid(bidId);
+		return responseEntity;	
+	}
+	
 }

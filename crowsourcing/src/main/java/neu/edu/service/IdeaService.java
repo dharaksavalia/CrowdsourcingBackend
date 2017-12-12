@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import neu.edu.controller.bid.BidCreation;
+import neu.edu.controller.funder.PurchasesCreation;
 import neu.edu.controller.idea.FundingCreation;
 import neu.edu.controller.idea.IdeaCreation;
 import neu.edu.controller.idea.ServiceCreation;
@@ -22,8 +23,10 @@ import neu.edu.dao.UserDao;
 import neu.edu.entity.Bids;
 import neu.edu.entity.Category;
 import neu.edu.entity.Creator;
+import neu.edu.entity.Funders;
 import neu.edu.entity.Funding;
 import neu.edu.entity.Idea;
+import neu.edu.entity.Purchases;
 import neu.edu.entity.ServiceDetail;
 import neu.edu.entity.User;
 
@@ -173,6 +176,24 @@ public class IdeaService {
 		}
 		return bidCreations;
 	}
+	public List<PurchasesCreation> getFunding(String emailId) {
+		// TODO Auto-generated method stub
+		List<PurchasesCreation>fundings=new ArrayList<>();
+		for(User user:userDao.findByEmailId(emailId)) {
+			for(Idea idea :user.getCreator().getIdeas()) {
+				for(Funding funding:idea.getFundings()) {
+					for(Purchases purchases:funding.getPurchaseses()) {
+						PurchasesCreation purchasesCreation=new PurchasesCreation();
+						purchasesCreation.setName(purchases.getFunders().getFunderName());
+						purchasesCreation.setAmount(purchases.getFunding().getAmount());
+						fundings.add(purchasesCreation);
+					}
+				}
+			}
+		}
+		return fundings;
+	}
+	
 	
 
 }
