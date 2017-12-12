@@ -1,5 +1,5 @@
 package neu.edu.entity;
-// Generated Dec 11, 2017 3:44:24 PM by Hibernate Tools 5.2.6.Final
+// Generated Dec 12, 2017 2:07:28 AM by Hibernate Tools 5.2.6.Final
 
 import java.util.HashSet;
 import java.util.Set;

@@ -20,7 +20,7 @@ public class UserController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> createUser(@Valid @RequestBody UserCreation userCreation) {
-
+		System.out.println(userCreation.toString());
 		ResponseEntity<?> responseEntity = new ResponseEntity<>("User Creation Failed",
 				HttpStatus.UNPROCESSABLE_ENTITY);
 		;
@@ -45,7 +45,7 @@ public class UserController {
 	}
 	@RequestMapping(path="/{emailId}/startup/{category}")
 	public ResponseEntity<?> makeMeStartup(@PathVariable("emailId") String emailId,@PathVariable("category")String Category) {
-
+		System.out.println("Stratup "+emailId);
 		ResponseEntity<?> responseEntity = new ResponseEntity<>("Cannot make you startup",
 				HttpStatus.UNPROCESSABLE_ENTITY);
 		

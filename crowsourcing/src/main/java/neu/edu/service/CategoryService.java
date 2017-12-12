@@ -1,5 +1,8 @@
 package neu.edu.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,10 +42,21 @@ public class CategoryService {
 	public boolean deleteACategory(String categoryName) {
 		Category category=findACategory(categoryName);
 		if(category!=null) {
+			if(category.getIdeas().size()==0)
 			categoryDao.delete(category);
+			else {
+				category.setStatus("disable");
+				categoryDao.save(category);
+			}
 			return true;
 		}
 	return false;
+	}
+	public List<String> getCategory() {
+		// TODO Auto-generated method stub
+		List<String>catories=new ArrayList();
+		for(Category category:categoryDao.findAll())if(category.getStatus()==null)catories.add(category.getCatergoryName());
+		return catories;
 	}
 
 }

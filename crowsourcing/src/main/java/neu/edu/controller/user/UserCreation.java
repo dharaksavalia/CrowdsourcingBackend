@@ -13,6 +13,12 @@ private String firstName;
 private String lastName;
 private String funders;
 private String startup;
+@Override
+public String toString() {
+	return "UserCreation [emailId=" + emailId + ", password=" + password + ", firstName=" + firstName + ", lastName="
+			+ lastName + ", funders=" + funders + ", startup=" + startup + ", creator=" + creator + ", category="
+			+ category + "]";
+}
 private String creator;
 private String category;
 public String getCategory() {

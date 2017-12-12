@@ -1,5 +1,5 @@
 package neu.edu.entity;
-// Generated Dec 11, 2017 3:44:24 PM by Hibernate Tools 5.2.6.Final
+// Generated Dec 12, 2017 2:07:28 AM by Hibernate Tools 5.2.6.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +22,7 @@ public class Category implements java.io.Serializable {
 
 	private Integer categoryId;
 	private String catergoryName;
+	private String status;
 	private Set<Idea> ideas = new HashSet<Idea>(0);
 	private Set<Startup> startups = new HashSet<Startup>(0);
 
@@ -32,8 +33,9 @@ public class Category implements java.io.Serializable {
 		this.catergoryName = catergoryName;
 	}
 
-	public Category(String catergoryName, Set<Idea> ideas, Set<Startup> startups) {
+	public Category(String catergoryName, String status, Set<Idea> ideas, Set<Startup> startups) {
 		this.catergoryName = catergoryName;
+		this.status = status;
 		this.ideas = ideas;
 		this.startups = startups;
 	}
@@ -57,6 +59,15 @@ public class Category implements java.io.Serializable {
 
 	public void setCatergoryName(String catergoryName) {
 		this.catergoryName = catergoryName;
+	}
+
+	@Column(name = "Status", length = 50)
+	public String getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")

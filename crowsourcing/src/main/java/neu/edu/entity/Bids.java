@@ -1,5 +1,5 @@
 package neu.edu.entity;
-// Generated Dec 11, 2017 3:44:24 PM by Hibernate Tools 5.2.6.Final
+// Generated Dec 12, 2017 2:07:28 AM by Hibernate Tools 5.2.6.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,14 +33,12 @@ public class Bids implements java.io.Serializable {
 	public Bids() {
 	}
 
-	public Bids(ServiceDetail serviceDetail, Startup startup, int bidAmount, String description, long timeRequired,
-			String status) {
+	public Bids(ServiceDetail serviceDetail, Startup startup, int bidAmount, String description, long timeRequired) {
 		this.serviceDetail = serviceDetail;
 		this.startup = startup;
 		this.bidAmount = bidAmount;
 		this.description = description;
 		this.timeRequired = timeRequired;
-		this.status = status;
 	}
 
 	public Bids(ServiceDetail serviceDetail, Startup startup, int bidAmount, String description, long timeRequired,
@@ -113,7 +111,7 @@ public class Bids implements java.io.Serializable {
 		this.timeRequired = timeRequired;
 	}
 
-	@Column(name = "status", nullable = false, length = 50)
+	@Column(name = "status", length = 50)
 	public String getStatus() {
 		return this.status;
 	}
