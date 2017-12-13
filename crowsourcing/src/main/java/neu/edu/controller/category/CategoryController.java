@@ -39,7 +39,7 @@ public ResponseEntity<?> deleteCategory(@PathVariable("category")String category
 		
 	}
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<?> getCategory(@PathVariable("category")String category){
+	public ResponseEntity<?> getCategory(){
 		
 		ResponseEntity<?> resposeEntity=new ResponseEntity<>("category not available",
 				HttpStatus.UNPROCESSABLE_ENTITY);
