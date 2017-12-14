@@ -1,15 +1,19 @@
 package neu.edu.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.ApplicationScope;
 
 import neu.edu.controller.user.UserCreation;
-import neu.edu.controller.user.UserModel;
 import neu.edu.dao.CategoryDao;
 import neu.edu.dao.CreatorDao;
 import neu.edu.dao.FundersDao;
@@ -24,7 +28,7 @@ import neu.edu.entity.Startup;
 import neu.edu.entity.User;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService{
 	String ADMIN="Yes";
 @Autowired
 UserDao userDao;
@@ -161,5 +165,39 @@ public boolean isUserCreator(String emailId) {
 		}
 	}
 	return false;
+}
+@Override
+public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	// TODO Auto-generated method stub
+	
+	List<User> users = userDao.findByEmailId(username);
+	 System.out.println("username="+username);
+	  if(users.isEmpty()) {
+          throw new UsernameNotFoundException(String.format("The username %s doesn't exist", username));
+      }
+	  User user=users.get(0);
+	  List<GrantedAuthority> authorities = new ArrayList<>();
+	  if(user.getAdmin()!=null) {
+			authorities.add(new SimpleGrantedAuthority("Admin"));
+
+	  }
+	  if(user.getCreator()!=null) {
+			authorities.add(new SimpleGrantedAuthority("Creator"));
+
+	  }
+	  if(user.getCreator()!=null) {
+			authorities.add(new SimpleGrantedAuthority("Startup"));
+
+	  }
+	  if(user.getCreator()!=null) {
+			authorities.add(new SimpleGrantedAuthority("Funder"));
+
+	  }	
+	
+  UserDetails userDetails = new org.springframework.security.core.userdetails.
+          User(user.getEmailId(), user.getPassword(), authorities);
+
+	return userDetails;
+	
 }
 }

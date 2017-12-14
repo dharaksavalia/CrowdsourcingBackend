@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan({"neu.edu.controller","neu.edu.service"})
+@ComponentScan({"neu.edu.config","neu.edu.config.security","neu.edu.controller","neu.edu.service"})
 @EnableJpaRepositories("neu.edu.dao")
 @EntityScan("neu.edu.entity")
 public class Application implements CommandLineRunner{

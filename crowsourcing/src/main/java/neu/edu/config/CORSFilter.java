@@ -32,6 +32,7 @@ public class CORSFilter implements Filter {
 		
 		System.out.println("output");
 		if ("OPTIONS".equalsIgnoreCase(req.getMethod())) {
+			System.out.println("Insdie the options");
 			res.setStatus(HttpServletResponse.SC_OK);
 		} else {
 			chain.doFilter(request, response);
